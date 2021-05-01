@@ -4,12 +4,11 @@ import {FormProvider, useForm} from 'react-hook-form';
 
 import FirstName from './FirstName';
 import LastName from './LastName';
+import FormState from '../FormState';
 import onSubmit from '../onSubmit';
 
 const Form = () => {
   const form = useForm({mode: 'onChange'});
-
-  console.log('submitCount', form.formState.submitCount);
 
   return (
     <FormProvider {...form}>
@@ -20,6 +19,7 @@ const Form = () => {
           Submit
         </Button>
       </View>
+      <FormState />
     </FormProvider>
   );
 };
