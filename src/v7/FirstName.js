@@ -2,28 +2,33 @@ import React from 'react';
 import {Text, TextInput} from 'react-native';
 import {useController, useFormContext} from 'react-hook-form';
 
-import onSubmit from './onSubmit';
-
-const LastName = () => {
-  const {handleSubmit} = useFormContext();
+const FirstName = () => {
+  const {setFocus} = useFormContext();
   const {
     fieldState: {error},
     field: {onChange, ...rest},
-  } = useController({name: 'lastName', rules: {required: true}});
+  } = useController({
+    name: 'firstName',
+    defaultValue: '',
+    rules: {required: true},
+  });
 
   return (
     <>
       <TextInput
         {...rest}
         underlineColorAndroid="blue"
-        placeholder="Last Name"
-        returnKeyType="send"
+        placeholder="First Name"
+        returnKeyType="next"
         blurOnSubmit={false}
         onChangeText={onChange}
-        onSubmitEditing={handleSubmit(onSubmit)}
+        onSubmitEditing={() => {
+          setFocus('lastName');
+        }}
       />
       <Text>{error ? 'This is required' : ' '}</Text>
     </>
   );
 };
-export default LastName;
+
+export default FirstName;
